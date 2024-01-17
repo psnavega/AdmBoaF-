@@ -15,6 +15,8 @@ Este projeto trata-se de uma implementação de uma API para a Administradora Bo
 
 Estrutura de dados na pasta doc, com o script do sql, bem como a visualização do diagrama
 
+Caso a visualização do diagrama não esteja suficientemente bom na imagem em doc, clique <a href="https://miro.com/app/board/uXjVN4wcQAI=/?share_link_id=156706185326">aqui</a> para visualizá-lo na web
+
 ## Como Executar o Projeto ##
 
 ### Clone o repositório: ###
@@ -45,6 +47,10 @@ Acesse <a href="http://localhost:7228">http://localhost:7228</a> no seu navegado
 ### Documentação da API ###
 
 A documentação da API pode ser gerada automaticamente utilizando o Swagger. Acesse <a href="http://localhost:7228/swagger">http://localhost:72287228/swagger</a> após iniciar a aplicação.</p>
+
+## Pendências ##
+
+O diagrama de sequência não será entregue. Não tive tempo hábil para desenvolver essa solução.
 
 ## Revisão ##
 
