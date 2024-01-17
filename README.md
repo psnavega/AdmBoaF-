@@ -3,6 +3,7 @@
 Este projeto trata-se de uma implementação de uma API para a Administradora Boa Fé imobiliári
 
 ## Requisitos
+## Libs e dependências
 
 <ul>
     <li>Linguagem: C#</li>
@@ -10,6 +11,11 @@ Este projeto trata-se de uma implementação de uma API para a Administradora Bo
     <li>Banco de Dados: SQL Server</li>
     <li>Mapeamento objeto-relacional (ORM): Entity Framework</li>
 </ul>
+
+
+## Artefatos
+
+Estrutura de dados na pasta doc, com o script do sql, bem como a visualização do diagrama
 
 ## Como Executar o Projeto ##
 

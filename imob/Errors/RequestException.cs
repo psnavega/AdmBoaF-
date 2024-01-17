@@ -9,6 +9,10 @@ namespace immob.Errors
         {
             ErrorCode = errorCode;
         }
+
+        public RequestException(string? message) : base(message)
+        {
+        }
     }
 }
 
