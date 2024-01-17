@@ -2,7 +2,6 @@
 
 Este projeto trata-se de uma implementação de uma API para a Administradora Boa Fé imobiliári
 
-## Requisitos
 ## Libs e dependências
 
 <ul>
@@ -12,10 +11,13 @@ Este projeto trata-se de uma implementação de uma API para a Administradora Bo
     <li>Mapeamento objeto-relacional (ORM): Entity Framework</li>
 </ul>
 
-
 ## Artefatos
 
 Estrutura de dados na pasta doc, com o script do sql, bem como a visualização do diagrama
+
+Caso a visualização do diagrama não esteja suficientemente bom na imagem em doc, clique <a href="https://miro.com/app/board/uXjVN4wcQAI=/?share_link_id=156706185326">aqui</a> para visualizá-lo na web
+
+Vídeo de explicação do projeto: <a href="https://vimeo.com/903754395?share=copy">Aqui</a>
 
 ## Como Executar o Projeto ##
 
@@ -48,6 +50,10 @@ Acesse <a href="http://localhost:7228">http://localhost:7228</a> no seu navegado
 
 A documentação da API pode ser gerada automaticamente utilizando o Swagger. Acesse <a href="http://localhost:7228/swagger">http://localhost:72287228/swagger</a> após iniciar a aplicação.</p>
 
+## Pendências ##
+
+O diagrama de sequência não será entregue. Não tive tempo hábil para desenvolver essa solução.
+
 ## Revisão ##
 
 Gitflow:
@@ -57,3 +63,9 @@ Gitflow:
         <li>PR nesse repositório</li>
     </ol>
 </body>
+
+## Observação ##
+
+Feedbacks são bem vindos
+
+Link p/ auxílio na conteinirização do banco de dados a quem interessar possa<a href="https://dev.to/cloudx/running-azure-sql-edge-on-docker-on-macos-m1-3lf5">aqui</a>
