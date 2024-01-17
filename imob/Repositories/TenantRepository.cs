@@ -3,9 +3,7 @@ using immob.Models;
 using Microsoft.EntityFrameworkCore;
 using immob.Domains.Interfaces;
 using immob.Domains.Records.Tenant;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using immob.Errors;
 
 namespace immob.Repositories
 {
@@ -42,7 +40,7 @@ namespace immob.Repositories
 
         public async Task<Tenant> Update(Guid id, UpdateTenant tenant)
         {
-            Tenant tenantOnDb = await GetById(id) ?? throw new Exception($"Tenant to ID: {id} not found");
+            Tenant tenantOnDb = await GetById(id) ?? throw new RequestException(404, $"Tenant to ID: {id} not found");
 
             tenantOnDb.UpdateName(tenant.Name);
             tenantOnDb.UpdateEmail(tenant.Email);
@@ -55,7 +53,7 @@ namespace immob.Repositories
 
         public async Task<bool> Delete(Guid id)
         {
-            Tenant tenantOnDb = await GetById(id) ?? throw new Exception($"Tenant to ID: {id} not found");
+            Tenant tenantOnDb = await GetById(id) ?? throw new RequestException(404, $"Tenant to ID: {id} not found");
 
             _context.Tenants.Remove(tenantOnDb);
             await _context.SaveChangesAsync();

@@ -3,6 +3,7 @@ using immob.Models;
 using Microsoft.EntityFrameworkCore;
 using immob.Domains.Interfaces;
 using immob.Domains.Records.Property;
+using immob.Errors;
 
 namespace immob.Repositories
 {
@@ -40,15 +41,17 @@ namespace immob.Repositories
 
         public async Task<Property> GetById(Guid id)
         {
+#pragma warning disable CS8603 // Possible null reference return.
             return await _context.Properties
                 .Include(p => p.Address)
                 .Include(p => p.Owners)
                 .FirstOrDefaultAsync(x => x.Id == id);
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
         public async Task<Property> Update(Guid id, UpdateProperty property)
         {
-            Property propertyOnDb = await GetById(id) ?? throw new Exception($"Property to ID: {id} not found");
+            Property propertyOnDb = await GetById(id) ?? throw new RequestException(404, $"Property to ID: {id} not found");
 
             propertyOnDb.UpdateAddress(property.Address);
             propertyOnDb.UpdateRentAmount(property.RentAmount);
@@ -61,7 +64,7 @@ namespace immob.Repositories
 
         public async Task<bool> Delete(Guid id)
         {
-            Property propertyOnDb = await GetById(id) ?? throw new Exception($"Property to ID: {id} not found");
+            Property propertyOnDb = await GetById(id) ?? throw new RequestException(404, $"Property to ID: {id} not found");
 
             _context.Properties.Remove(propertyOnDb);
             await _context.SaveChangesAsync();

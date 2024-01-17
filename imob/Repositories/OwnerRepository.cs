@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using immob.Domains.Interfaces;
 using immob.Domains.Records.Owner;
 using System;
+using immob.Errors;
 
 namespace immob.Repositories
 {
@@ -36,7 +37,7 @@ namespace immob.Repositories
 
         public async Task<Owner> Update(Guid id, UpdateOwner owner)
         {
-            Owner ownerOnDb = await GetById(id) ?? throw new Exception($"Owner to ID: {id} not found");
+            Owner ownerOnDb = await GetById(id) ?? throw new RequestException(404, $"Owner to ID: {id} not found");
 
             ownerOnDb.UpdateName(owner.Name);
             ownerOnDb.UpdateEmail(owner.Email);
@@ -49,7 +50,7 @@ namespace immob.Repositories
 
         public async Task<bool> Delete(Guid id)
         {
-            Owner ownerOnDb = await GetById(id) ?? throw new Exception($"Owner to ID: {id} not found");
+            Owner ownerOnDb = await GetById(id) ?? throw new RequestException(404, $"Owner to ID: {id} not found");
 
             _context.Owners.Remove(ownerOnDb);
             await _context.SaveChangesAsync();
