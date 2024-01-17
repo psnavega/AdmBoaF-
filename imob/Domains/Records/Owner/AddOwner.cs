@@ -1,5 +1,5 @@
-﻿namespace immob.Domains.Records.Owner
+namespace immob.Domains.Records.Owner
 {
-	public record AddOwner(string Name, string Email);
+    public record AddOwner(string Name, string Email);
 }
 

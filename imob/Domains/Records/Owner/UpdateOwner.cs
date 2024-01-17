@@ -1,5 +1,5 @@
-﻿namespace immob.Domains.Records.Owner
+namespace immob.Domains.Records.Owner
 {
-	public record UpdateOwner(String Name, string Email);
+    public record UpdateOwner(String Name, string Email);
 }
 

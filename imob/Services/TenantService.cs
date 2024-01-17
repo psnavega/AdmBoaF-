@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using immob.Domains.Dtos;
 using immob.Domains.Interfaces;
 using immob.Domains.Records.Tenant;

@@ -1,7 +1,7 @@
-﻿namespace immob.Models
+namespace immob.Models
 {
-	public class Tenant
-	{
+    public class Tenant
+    {
         public Guid Id { get; init; }
         public string Name { get; private set; }
         public string Email { get; private set; }

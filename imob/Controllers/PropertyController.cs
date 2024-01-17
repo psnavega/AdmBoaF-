@@ -1,4 +1,4 @@
-﻿using immob.Domains.Records.Property;
+using immob.Domains.Records.Property;
 using immob.Services;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,4 @@
-﻿namespace immob.Models;
+namespace immob.Models;
 public class Owner
 {
     public Guid Id { get; private set; }

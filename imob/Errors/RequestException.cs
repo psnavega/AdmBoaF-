@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 namespace immob.Errors
 {
     public class RequestException : Exception
@@ -10,5 +10,5 @@ namespace immob.Errors
             ErrorCode = errorCode;
         }
     }
-}                                                                                                                                                                                                                   
+}
 

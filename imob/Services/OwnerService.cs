@@ -1,11 +1,11 @@
-﻿using immob.Domains.Dtos;
+using immob.Domains.Dtos;
 using immob.Domains.Interfaces;
 using immob.Domains.Records.Owner;
 
 namespace immob.Services
 {
-	public class OwnerService
-	{
+    public class OwnerService
+    {
         private readonly IOwnerRepository ownerRepository;
 
         public OwnerService(IOwnerRepository customerRepository)

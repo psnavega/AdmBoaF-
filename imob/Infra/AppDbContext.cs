@@ -1,4 +1,4 @@
-﻿using immob.Models;
+using immob.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace immob.Infra;

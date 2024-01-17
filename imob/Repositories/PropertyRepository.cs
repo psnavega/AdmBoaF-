@@ -1,4 +1,4 @@
-﻿using immob.Infra;
+using immob.Infra;
 using immob.Models;
 using Microsoft.EntityFrameworkCore;
 using immob.Domains.Interfaces;

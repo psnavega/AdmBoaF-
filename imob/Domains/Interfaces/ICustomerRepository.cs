@@ -1,4 +1,4 @@
-﻿using immob.Domains.Records.Owner;
+using immob.Domains.Records.Owner;
 using immob.Models;
 
 namespace immob.Domains.Interfaces
