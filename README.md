@@ -17,6 +17,8 @@ Estrutura de dados na pasta doc, com o script do sql, bem como a visualização 
 
 Caso a visualização do diagrama não esteja suficientemente bom na imagem em doc, clique <a href="https://miro.com/app/board/uXjVN4wcQAI=/?share_link_id=156706185326">aqui</a> para visualizá-lo na web
 
+Vídeo de explicação do projeto: <a href="https://vimeo.com/903754395?share=copy">Aqui</a>
+
 ## Como Executar o Projeto ##
 
 ### Clone o repositório: ###
@@ -61,3 +63,9 @@ Gitflow:
         <li>PR nesse repositório</li>
     </ol>
 </body>
+
+## Observação ##
+
+Feedbacks são bem vindos
+
+Link p/ auxílio na conteinirização do banco de dados a quem interessar possa<a href="https://dev.to/cloudx/running-azure-sql-edge-on-docker-on-macos-m1-3lf5">aqui</a>
