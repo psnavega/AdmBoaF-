@@ -10,5 +10,6 @@ namespace immob.Domains.Interfaces
         Task<Owner> Add(AddOwner owner);
         Task<Owner> Update(Guid id, UpdateOwner owner);
         Task<bool> Delete(Guid id);
+        Task<bool> IsEmailUnique(string email);
     }
 }

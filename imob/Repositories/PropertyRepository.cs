@@ -33,6 +33,7 @@ namespace immob.Repositories
         public async Task<List<Property>> GetAll()
         {
             return await _context.Properties
+                .Include(p => p.Address)
                 .Include(p => p.Owners)
                 .ToListAsync();
         }
@@ -40,6 +41,7 @@ namespace immob.Repositories
         public async Task<Property> GetById(Guid id)
         {
             return await _context.Properties
+                .Include(p => p.Address)
                 .Include(p => p.Owners)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }

@@ -36,7 +36,6 @@
     <None Remove="Services\" />
     <None Remove="Domains\Records\Property\" />
     <None Remove="Domains\Records\Tenant\" />
-    <None Remove="Migrations\" />
     <None Remove="Errors\" />
   </ItemGroup>
   <ItemGroup>
@@ -51,7 +50,6 @@
     <Folder Include="Services\" />
     <Folder Include="Domains\Records\Property\" />
     <Folder Include="Domains\Records\Tenant\" />
-    <Folder Include="Migrations\" />
     <Folder Include="Errors\" />
   </ItemGroup>
   <ItemGroup>
@@ -64,5 +62,9 @@
     <Compile Remove="Migrations\20240116160014_create-initial-setup.cs" />
     <Compile Remove="Migrations\20240116160014_create-initial-setup.Designer.cs" />
     <Compile Remove="Routes\CustomerRoutes.cs" />
+    <Compile Remove="Migrations\20240116204739_create-initial-setup.cs" />
+    <Compile Remove="Migrations\20240116204739_create-initial-setup.Designer.cs" />
+    <Compile Remove="Migrations\20240117011925_create-initial-setup.cs" />
+    <Compile Remove="Migrations\20240117011925_create-initial-setup.Designer.cs" />
   </ItemGroup>
 </Project>

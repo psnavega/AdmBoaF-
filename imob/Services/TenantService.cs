@@ -105,7 +105,6 @@ namespace immob.Services
 
             return tenantDto;
         }
-
     }
 }
 

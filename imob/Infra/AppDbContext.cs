@@ -1,24 +1,38 @@
-﻿using Microsoft.EntityFrameworkCore;
-using immob.Models;
+﻿using immob.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace immob.Infra
+namespace immob.Infra;
+public class AppDbContext : DbContext
 {
-    public class AppDbContext : DbContext
+    private readonly IConfiguration _configuration;
+
+    public DbSet<Owner> Owners { get; set; }
+    public DbSet<Tenant> Tenants { get; set; }
+    public DbSet<Property> Properties { get; set; }
+    public DbSet<PropertyOwner> PropertyOwners { get; set; }
+    public DbSet<Address> Address { get; set; }
+
+    public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration configuration) : base(options)
     {
-        public DbSet<Owner> Owners { get; set; }
-        public DbSet<Tenant> Tenants { get; set; }
-        public DbSet<Property> Properties { get; set; }
-        public DbSet<PropertyOwner> PropertyOwners { get; set; }
+        _configuration = configuration;
+    }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=localhost;Database=immob;User Id=SA;Password=MyPass@word;Persist Security Info=False;Encrypt=False");
+            string connectionString = _configuration.GetConnectionString("DatabaseString");
 
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new InvalidOperationException("The connection string is not configured");
             }
 
-            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer(connectionString);
         }
+
+        base.OnConfiguring(optionsBuilder);
     }
 }
+
+

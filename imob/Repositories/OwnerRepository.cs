@@ -3,6 +3,7 @@ using immob.Models;
 using Microsoft.EntityFrameworkCore;
 using immob.Domains.Interfaces;
 using immob.Domains.Records.Owner;
+using System;
 
 namespace immob.Repositories
 {
@@ -17,7 +18,7 @@ namespace immob.Repositories
 
         public async Task<Owner> Add(AddOwner owner)
         {
-            var newOwner = new Owner(owner.Name);
+            var newOwner = new Owner(owner.Name, owner.Email);
             await _context.AddAsync(newOwner);
             await _context.SaveChangesAsync();
             return newOwner;
@@ -25,7 +26,7 @@ namespace immob.Repositories
 
         public async Task<List<Owner>> GetAll()
         {
-            return await _context.Owners.ToListAsync<Owner>();
+            return await _context.Owners.ToListAsync();
         }
 
         public async Task<Owner> GetById(Guid id)
@@ -38,22 +39,27 @@ namespace immob.Repositories
             Owner ownerOnDb = await GetById(id) ?? throw new Exception($"Owner to ID: {id} not found");
 
             ownerOnDb.UpdateName(owner.Name);
+            ownerOnDb.UpdateEmail(owner.Email);
 
             _context.Owners.Update(ownerOnDb);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return ownerOnDb;
         }
 
         public async Task<bool> Delete(Guid id)
         {
-            Owner ownersOnDb = await GetById(id) ?? throw new Exception($"Owner to ID: {id} not found");
+            Owner ownerOnDb = await GetById(id) ?? throw new Exception($"Owner to ID: {id} not found");
 
-            _context.Owners.Remove(ownersOnDb);
+            _context.Owners.Remove(ownerOnDb);
             await _context.SaveChangesAsync();
 
             return true;
         }
+
+        public async Task<bool> IsEmailUnique(string email)
+        {
+            return !await _context.Owners.AnyAsync(o => o.Email == email);
+        }
     }
 }
-

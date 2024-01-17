@@ -6,7 +6,7 @@ namespace immob.Models
     public class Property
     {
         public Guid Id { get; init; }
-        public string Address { get; private set; }
+        public Address Address { get; private set; }
         public decimal RentAmount { get; private set; }
         public bool IsAvailable { get; private set; }
         public Guid? TenantId { get; private set; }
@@ -15,7 +15,7 @@ namespace immob.Models
 
         private Property() { }
 
-        public Property(string address, decimal rentAmount, List<Owner> owners)
+        public Property(Address address, decimal rentAmount, List<Owner> owners)
         {
             Id = Guid.NewGuid();
             Address = address;
@@ -29,7 +29,7 @@ namespace immob.Models
             RentAmount = rentAmount;
         }
 
-        public void UpdateAddress(string address)
+        public void UpdateAddress(Address address)
         {
             Address = address;
         }

@@ -18,7 +18,7 @@ namespace immob.Services
         public async Task<PropertyDto> Add(AddProperty property)
         {
             var newProperty = await _propertyRepository.Add(property);
-            var result = new PropertyDto(newProperty.Id, newProperty.Address, newProperty.RentAmount, newProperty.IsAvailable, newProperty.Owners.Select(o => new OwnerDto(o.Id, o.Name)).ToList());
+            var result = new PropertyDto(newProperty.Id, newProperty.Address, newProperty.RentAmount, newProperty.IsAvailable, newProperty.Owners.Select(o => new OwnerDto(o.Id, o.Name, o.Email)).ToList());
 
             return result;
         }
@@ -33,7 +33,7 @@ namespace immob.Services
                     p.Address,
                     p.RentAmount,
                     p.IsAvailable,
-                    p.Owners.Select(o => new OwnerDto(o.Id, o.Name)).ToList() ?? new List<OwnerDto>()
+                    p.Owners.Select(o => new OwnerDto(o.Id, o.Name, o.Email)).ToList()
                 ))
                 .ToList();
 
@@ -44,7 +44,7 @@ namespace immob.Services
         public async Task<PropertyDto> GetById(Guid id)
         {
             var property = await _propertyRepository.GetById(id) ?? throw new Exception($"Property with ID {id} not found");
-            var propertyDto = new PropertyDto(property.Id, property.Address, property.RentAmount, property.IsAvailable, property.Owners.Select(o => new OwnerDto(o.Id, o.Name)).ToList());
+            var propertyDto = new PropertyDto(property.Id, property.Address, property.RentAmount, property.IsAvailable, property.Owners.Select(o => new OwnerDto(o.Id, o.Name, o.Email)).ToList());
 
             return propertyDto;
         }
@@ -52,7 +52,7 @@ namespace immob.Services
         public async Task<PropertyDto> Update(Guid id, UpdateProperty property)
         {
             var propertyUpdated = await _propertyRepository.Update(id, property) ?? throw new Exception($"Property with ID {id} not found");
-            var result = new PropertyDto(propertyUpdated.Id, propertyUpdated.Address, propertyUpdated.RentAmount, propertyUpdated.IsAvailable, propertyUpdated.Owners.Select(o => new OwnerDto(o.Id, o.Name)).ToList());
+            var result = new PropertyDto(propertyUpdated.Id, propertyUpdated.Address, propertyUpdated.RentAmount, propertyUpdated.IsAvailable, propertyUpdated.Owners.Select(o => new OwnerDto(o.Id, o.Name, o.Email)).ToList());
 
             return result;
         }
@@ -79,7 +79,7 @@ namespace immob.Services
                 propertyWithThisOwner.Address,
                 propertyWithThisOwner.RentAmount,
                 propertyWithThisOwner.IsAvailable,
-                propertyWithThisOwner.Owners.Select(owner => new OwnerDto(owner.Id, owner.Name)).ToList()
+                propertyWithThisOwner.Owners.Select(owner => new OwnerDto(owner.Id, owner.Name, owner.Email)).ToList()
             );
 
             return propertyDto;
@@ -107,7 +107,7 @@ namespace immob.Services
                 propertyWithoutThisOwner.Address,
                 propertyWithoutThisOwner.RentAmount,
                 propertyWithoutThisOwner.IsAvailable,
-                propertyWithoutThisOwner.Owners.Select(owner => new OwnerDto(owner.Id, owner.Name)).ToList()
+                propertyWithoutThisOwner.Owners.Select(owner => new OwnerDto(owner.Id, owner.Name, owner.Email)).ToList()
             );
 
             return propertyDto;
