@@ -12,8 +12,8 @@ using immob.Infra;
 namespace immob.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240116144400_create-tenant-model")]
-    partial class createtenantmodel
+    [Migration("20240116204739_create-initial-setup")]
+    partial class createinitialsetup
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace immob.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("immob.Models.Customer", b =>
+            modelBuilder.Entity("immob.Models.Owner", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,9 +38,14 @@ namespace immob.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("PropertyId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.HasIndex("PropertyId");
+
+                    b.ToTable("Owners");
                 });
 
             modelBuilder.Entity("immob.Models.Property", b =>
@@ -56,9 +61,6 @@ namespace immob.Migrations
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("OwnerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<decimal>("RentAmount")
                         .HasColumnType("decimal(18,2)");
 
@@ -67,11 +69,30 @@ namespace immob.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
-
                     b.HasIndex("TenantId");
 
                     b.ToTable("Properties");
+                });
+
+            modelBuilder.Entity("immob.Models.PropertyOwner", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PropertyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.HasIndex("PropertyId");
+
+                    b.ToTable("PropertyOwners");
                 });
 
             modelBuilder.Entity("immob.Models.Tenant", b =>
@@ -93,19 +114,49 @@ namespace immob.Migrations
                     b.ToTable("Tenants");
                 });
 
+            modelBuilder.Entity("immob.Models.Owner", b =>
+                {
+                    b.HasOne("immob.Models.Property", null)
+                        .WithMany("Owners")
+                        .HasForeignKey("PropertyId");
+                });
+
             modelBuilder.Entity("immob.Models.Property", b =>
                 {
-                    b.HasOne("immob.Models.Customer", "Owner")
-                        .WithMany()
+                    b.HasOne("immob.Models.Tenant", "Tenant")
+                        .WithMany("RentedProperties")
+                        .HasForeignKey("TenantId");
+
+                    b.Navigation("Tenant");
+                });
+
+            modelBuilder.Entity("immob.Models.PropertyOwner", b =>
+                {
+                    b.HasOne("immob.Models.Owner", "Owner")
+                        .WithMany("OwnedProperties")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("immob.Models.Tenant", null)
-                        .WithMany("RentedProperties")
-                        .HasForeignKey("TenantId");
+                    b.HasOne("immob.Models.Property", "Property")
+                        .WithMany()
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Owner");
+
+                    b.Navigation("Property");
+                });
+
+            modelBuilder.Entity("immob.Models.Owner", b =>
+                {
+                    b.Navigation("OwnedProperties");
+                });
+
+            modelBuilder.Entity("immob.Models.Property", b =>
+                {
+                    b.Navigation("Owners");
                 });
 
             modelBuilder.Entity("immob.Models.Tenant", b =>

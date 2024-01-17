@@ -1,14 +1,14 @@
-﻿using immob.Domains.Records.Customer;
+﻿using immob.Domains.Records.Owner;
 using immob.Models;
 
 namespace immob.Domains.Interfaces
 {
-    public interface ICustomerRepository
+    public interface IOwnerRepository
     {
-        Task<List<Customer>> GetAll();
-        Task<Customer> GetById(Guid id);
-        Task<Customer> Add(AddCustomer customer);
-        Task<Customer> Update(Guid id, UpdateCustomer customer);
+        Task<List<Owner>> GetAll();
+        Task<Owner> GetById(Guid id);
+        Task<Owner> Add(AddOwner owner);
+        Task<Owner> Update(Guid id, UpdateOwner owner);
         Task<bool> Delete(Guid id);
     }
 }

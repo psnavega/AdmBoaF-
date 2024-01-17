@@ -43,11 +43,25 @@ namespace immob.Controllers
             return Ok(result);
         }
 
+        [HttpPatch("{propertyId:guid}/remove/{ownerId:guid}")]
+        public async Task<IActionResult> RemoveOwner(Guid propertyId, Guid ownerId)
+        {
+            var result = await _propertyService.DeleteOwner(propertyId, ownerId);
+            return Ok(result);
+        }
+
+        [HttpPatch("{propertyId:guid}/add/{ownerId:guid}")]
+        public async Task<IActionResult> AddOwner(Guid propertyId, Guid ownerId)
+        {
+            var result = await _propertyService.AddOwner(propertyId, ownerId);
+            return Ok(result);
+        }
+
         [HttpDelete("{id:guid}")]
-        public async Task<bool> DeleteProperty(Guid id)
+        public async Task<IActionResult> RemoveOwner(Guid id)
         {
             var result = await _propertyService.Delete(id);
-            return result;
+            return Ok(result);
         }
     }
 }

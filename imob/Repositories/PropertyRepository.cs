@@ -17,10 +17,14 @@ namespace immob.Repositories
 
         public async Task<Property> Add(AddProperty property)
         {
-            var owner = await _context.Customers.FindAsync(property.OwnerId) ?? throw new Exception($"Owner with ID {property.OwnerId} not found");
-            var newProperty = new Property(property.Address, property.RentAmount, owner);
+            var owner = await _context.Owners.FindAsync(property.OwnerId) ?? throw new Exception($"Owner with ID {property.OwnerId} not found");
+            var newProperty = new Property(property.Address, property.RentAmount, new List<Owner> { owner });
 
             await _context.AddAsync(newProperty);
+
+            var propertyOwner = new PropertyOwner { PropertyId = newProperty.Id, OwnerId = owner.Id };
+            owner.OwnedProperties.Add(propertyOwner);
+
             await _context.SaveChangesAsync();
 
             return newProperty;
@@ -28,12 +32,16 @@ namespace immob.Repositories
 
         public async Task<List<Property>> GetAll()
         {
-            return await _context.Properties.ToListAsync();
+            return await _context.Properties
+                .Include(p => p.Owners)
+                .ToListAsync();
         }
 
         public async Task<Property> GetById(Guid id)
         {
-            return await _context.Properties.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Properties
+                .Include(p => p.Owners)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Property> Update(Guid id, UpdateProperty property)

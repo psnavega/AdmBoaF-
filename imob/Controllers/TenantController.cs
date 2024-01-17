@@ -50,5 +50,20 @@ namespace immob.Controllers
             var result = await _tenantService.Delete(id);
             return result;
         }
+
+        [HttpPatch("{tenantId:guid}/rent/{propertyId:guid}")]
+        public async Task<IActionResult> RentProperty(Guid tenantId, Guid propertyId)
+        {
+            var result = await _tenantService.RentProperty(tenantId, propertyId);
+            return Ok(result);
+        }
+
+        [HttpPatch("{tenantId:guid}/vacate/{propertyId:guid}")]
+        public async Task<IActionResult> VacateProperty(Guid tenantId, Guid propertyId)
+        {
+            var result = await _tenantService.VacateProperty(tenantId, propertyId);
+            return Ok(result);
+        }
+
     }
 }

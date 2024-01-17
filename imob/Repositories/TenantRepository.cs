@@ -28,13 +28,17 @@ namespace immob.Repositories
 
         public async Task<List<Tenant>> GetAll()
         {
-            return await _context.Tenants.ToListAsync();
+            return await _context.Tenants.Include(t => t.RentedProperties).ToListAsync();
         }
+
 
         public async Task<Tenant> GetById(Guid id)
         {
-            return await _context.Tenants.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Tenants
+                .Include(t => t.RentedProperties)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
+
 
         public async Task<Tenant> Update(Guid id, UpdateTenant tenant)
         {

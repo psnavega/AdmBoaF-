@@ -2,59 +2,58 @@
 using immob.Models;
 using Microsoft.EntityFrameworkCore;
 using immob.Domains.Interfaces;
-using immob.Domains.Records.Customer;
+using immob.Domains.Records.Owner;
 
 namespace immob.Repositories
 {
-    public class CustomerRepository : ICustomerRepository
+    public class OwnerRepository : IOwnerRepository
     {
         private readonly AppDbContext _context;
 
-        public CustomerRepository(AppDbContext context)
+        public OwnerRepository(AppDbContext context)
         {
             _context = context;
         }
 
-        public async Task<Customer> Add(AddCustomer customer)
+        public async Task<Owner> Add(AddOwner owner)
         {
-            var newCustomer = new Customer(customer.Name);
-            await _context.AddAsync(newCustomer);
+            var newOwner = new Owner(owner.Name);
+            await _context.AddAsync(newOwner);
             await _context.SaveChangesAsync();
-            return newCustomer;
+            return newOwner;
         }
 
-        public async Task<List<Customer>> GetAll()
+        public async Task<List<Owner>> GetAll()
         {
-            return await _context.Customers.ToListAsync<Customer>();
+            return await _context.Owners.ToListAsync<Owner>();
         }
 
-        public async Task<Customer> GetById(Guid id)
+        public async Task<Owner> GetById(Guid id)
         {
-            return await _context.Customers.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Owners.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<Customer> Update(Guid id, UpdateCustomer customer)
+        public async Task<Owner> Update(Guid id, UpdateOwner owner)
         {
-            Customer customerOnDb = await GetById(id) ?? throw new Exception($"Customer to ID: {id} not found");
+            Owner ownerOnDb = await GetById(id) ?? throw new Exception($"Owner to ID: {id} not found");
 
-            customerOnDb.UpdateName(customer.Name);
+            ownerOnDb.UpdateName(owner.Name);
 
-            _context.Customers.Update(customerOnDb);
+            _context.Owners.Update(ownerOnDb);
             _context.SaveChanges();
 
-            return customerOnDb;
+            return ownerOnDb;
         }
 
         public async Task<bool> Delete(Guid id)
         {
-            Customer customerOnDb = await GetById(id) ?? throw new Exception($"Customer to ID: {id} not found");
+            Owner ownersOnDb = await GetById(id) ?? throw new Exception($"Owner to ID: {id} not found");
 
-            _context.Customers.Remove(customerOnDb);
+            _context.Owners.Remove(ownersOnDb);
             await _context.SaveChangesAsync();
 
             return true;
         }
-
     }
 }
 

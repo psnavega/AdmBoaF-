@@ -1,56 +1,56 @@
 ﻿using immob.Domains.Dtos;
 using immob.Domains.Interfaces;
-using immob.Domains.Records.Customer;
+using immob.Domains.Records.Owner;
 
 namespace immob.Services
 {
-	public class CustomerService
+	public class OwnerService
 	{
-        private readonly ICustomerRepository _customerRepository;
+        private readonly IOwnerRepository ownerRepository;
 
-        public CustomerService(ICustomerRepository customerRepository)
+        public OwnerService(IOwnerRepository customerRepository)
         {
-            _customerRepository = customerRepository;
+            ownerRepository = customerRepository;
         }
 
-        public async Task<CustomerDto> Add(AddCustomer customer)
+        public async Task<OwnerDto> Add(AddOwner owner)
         {
-            var newCustomer = await _customerRepository.Add(customer);
-            var result = new CustomerDto(newCustomer.Id, newCustomer.Name);
+            var newOwner = await ownerRepository.Add(owner);
+            var result = new OwnerDto(newOwner.Id, newOwner.Name);
 
             return result;
         }
 
-        public async Task<List<CustomerDto>> GetAll()
+        public async Task<List<OwnerDto>> GetAll()
         {
-            var customers = await _customerRepository.GetAll();
+            var owners = await ownerRepository.GetAll();
 
-            var customerDtos = customers.Select(c => new CustomerDto(c.Id, c.Name)).ToList();
+            var ownersDtos = owners.Select(c => new OwnerDto(c.Id, c.Name)).ToList();
 
-            return customerDtos;
+            return ownersDtos;
         }
 
 
-        public async Task<CustomerDto> GetById(Guid id)
+        public async Task<OwnerDto> GetById(Guid id)
         {
-            var customer = await _customerRepository.GetById(id) ?? throw new Exception($"Customer with ID {id} not found");
-            var customerDto = new CustomerDto(customer.Id, customer.Name);
+            var owner = await ownerRepository.GetById(id) ?? throw new Exception($"Customer with ID {id} not found");
+            var ownerDto = new OwnerDto(owner.Id, owner.Name);
 
-            return customerDto;
+            return ownerDto;
         }
 
 
-        public async Task<CustomerDto> Update(Guid id, UpdateCustomer customer)
+        public async Task<OwnerDto> Update(Guid id, UpdateOwner owner)
         {
-            var customerUpdated = await _customerRepository.Update(id, customer) ?? throw new Exception($"Customer with ID {id} not found");
-            var result = new CustomerDto(customerUpdated.Id, customerUpdated.Name);
+            var ownerUpdated = await ownerRepository.Update(id, owner) ?? throw new Exception($"Customer with ID {id} not found");
+            var result = new OwnerDto(ownerUpdated.Id, ownerUpdated.Name);
 
             return result;
         }
 
         public async Task<bool> Delete(Guid id)
         {
-            var result = await _customerRepository.Delete(id);
+            var result = await ownerRepository.Delete(id);
 
             return result;
         }

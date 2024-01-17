@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <None Remove="Models\" />
-    <None Remove="Routes\" />
     <None Remove="Controllers\" />
     <None Remove="Infra\" />
     <None Remove="Repositories\" />
@@ -38,10 +37,10 @@
     <None Remove="Domains\Records\Property\" />
     <None Remove="Domains\Records\Tenant\" />
     <None Remove="Migrations\" />
+    <None Remove="Errors\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Routes\" />
     <Folder Include="Controllers\" />
     <Folder Include="Infra\" />
     <Folder Include="Repositories\" />
@@ -53,6 +52,7 @@
     <Folder Include="Domains\Records\Property\" />
     <Folder Include="Domains\Records\Tenant\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Errors\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Migrations\20240116035736_Initial.cs" />
@@ -61,5 +61,8 @@
     <Compile Remove="Models\Customer.cs" />
     <Compile Remove="Migrations\20240116082814_create-tenant-model.Designer.cs" />
     <Compile Remove="Migrations\20240116082814_create-tenant-model.cs" />
+    <Compile Remove="Migrations\20240116160014_create-initial-setup.cs" />
+    <Compile Remove="Migrations\20240116160014_create-initial-setup.Designer.cs" />
+    <Compile Remove="Routes\CustomerRoutes.cs" />
   </ItemGroup>
 </Project>

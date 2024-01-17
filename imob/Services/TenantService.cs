@@ -8,10 +8,12 @@ namespace immob.Services
     public class TenantService
     {
         private readonly ITenantRepository _tenantRepository;
+        private readonly IPropertyRepository _propertyRepository;
 
-        public TenantService(ITenantRepository tenantRepository)
+        public TenantService(ITenantRepository tenantRepository, IPropertyRepository propertyRepository)
         {
             _tenantRepository = tenantRepository;
+            _propertyRepository = propertyRepository;
         }
 
         public async Task<TenantDto> Add(AddTenant tenant)
@@ -53,6 +55,57 @@ namespace immob.Services
 
             return result;
         }
+
+        public async Task<TenantDto> RentProperty(Guid tenantId, Guid propertyId)
+        {
+            var tenant = await _tenantRepository.GetById(tenantId) ?? throw new Exception($"Tenant with ID {tenantId} not found");
+            var property = await _propertyRepository.GetById(propertyId) ?? throw new Exception($"Property with ID {propertyId} not found");
+
+            if (tenant == null || property == null)
+            {
+                throw new InvalidOperationException("Tenant or propety cannot be found on database");
+            }
+
+            if (tenant.RentedProperties.Any())
+            {
+                throw new InvalidOperationException("Tenant already has a rented property. Cannot rent another property.");
+            }
+            else
+            {
+                tenant.RentProperty(property);
+                var tenantWithPropertyRented = await _tenantRepository.Update(tenantId, new UpdateTenant(tenant.Name, tenant.Email));
+                var tenantDto = new TenantDto(
+                    tenantWithPropertyRented.Id,
+                    tenantWithPropertyRented.Name,
+                    tenantWithPropertyRented.Email,
+                    tenantWithPropertyRented.RentedProperties.Select(p => p.Id).ToList()
+                    );
+                return tenantDto;
+            }
+        }
+
+        public async Task<TenantDto> VacateProperty(Guid tenantId, Guid propertyId)
+        {
+            var tenant = await _tenantRepository.GetById(tenantId) ?? throw new Exception($"Tenant with ID {tenantId} not found");
+            var property = await _propertyRepository.GetById(propertyId) ?? throw new Exception($"Property with ID {propertyId} not found");
+
+            if (tenant == null || property == null)
+            {
+                throw new InvalidOperationException("Tenant or propety cannot be found on database");
+            }
+
+            tenant.VacateProperty(property);
+            var tenantWithoutPropertyRented = await _tenantRepository.Update(tenantId, new UpdateTenant(tenant.Name, tenant.Email));
+            var tenantDto = new TenantDto(
+                tenantWithoutPropertyRented.Id,
+                tenantWithoutPropertyRented.Name,
+                tenantWithoutPropertyRented.Email,
+                tenantWithoutPropertyRented.RentedProperties.Select(p => p.Id).ToList()
+                );
+
+            return tenantDto;
+        }
+
     }
 }
 

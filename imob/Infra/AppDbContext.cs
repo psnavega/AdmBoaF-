@@ -5,9 +5,10 @@ namespace immob.Infra
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Owner> Owners { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<Property> Properties { get; set; }
+        public DbSet<PropertyOwner> PropertyOwners { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

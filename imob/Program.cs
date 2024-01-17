@@ -13,12 +13,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<AppDbContext>();
-builder.Services.AddScoped<CustomerService>();
+builder.Services.AddScoped<OwnerService>();
 builder.Services.AddScoped<PropertyService>();
 builder.Services.AddScoped<TenantService>();
 builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
 builder.Services.AddScoped<ITenantRepository, TenantRepository>();
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IOwnerRepository, OwnerRepository>();
 
 var app = builder.Build();
 

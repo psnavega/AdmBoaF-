@@ -30,6 +30,11 @@
         {
             RentedProperties.Add(property);
         }
+
+        public void VacateProperty(Property property)
+        {
+            RentedProperties.Remove(property);
+        }
     }
 }
 
