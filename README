@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Desenvolvedor .NET - Administradora Boa Fé</title>
+</head>
+
+<body>
+    <h1>Administradora Boa Fé</h1>
+
+    <p>Este projeto trata-se de uma implementação de uma API para a Administradora Boa Fé imobiliária</p>
+
+    <h2>Requisitos</h2>
+
+    <ul>
+        <li>Linguagem: C#</li>
+        <li>Plataforma: .NET Framework ou .NET Core ou .NET 5</li>
+        <li>Banco de Dados: SQL Server</li>
+        <li>Mapeamento objeto-relacional (ORM): Entity Framework</li>
+    </ul>
+
+    <h2>Estrutura do Projeto</h2>
+
+    <h2>Como Executar o Projeto</h2>
+
+    <ol>
+        <li>Clone o repositório:</li>
+        <pre><code>git clone https://github.com/psnavega/AdmBoaF-.git
+cd nome-do-projeto
+</code></pre>
+        <li>Configure a string de conexão com o banco de dados no arquivo <code>appsettings.json</code>.</li>
+        <pre><code>{
+  "ConnectionStrings": {
+    "DefaultConnection": "SuaStringDeConexao"
+  }
+}
+</code></pre>
+        <li>Execute as migrações do banco de dados:</li>
+        <pre><code>dotnet ef database update
+</code></pre>
+        <li>Execute a aplicação:</li>
+        <pre><code>dotnet run
+</code></pre>
+        <li>Acesse <a href="http://localhost:7228">http://localhost:7228</a> no seu navegador.</li>
+    </ol>
+
+    <h2>Testes</h2>
+
+    <p>Execute os testes unitários com o comando:</p>
+    <pre><code>dotnet test
+</code></pre>
+
+    <h2>Extras</h2>
+
+    <h3>Documentação da API</h3>
+
+    <p>A documentação da API pode ser gerada automaticamente utilizando o Swagger. Acesse <a href="http://localhost:7228/swagger">http://localhost:72287228/swagger</a> após iniciar a aplicação.</p>
+
+    <h2>Revisão</h2>
+
+    <p>Gitflow:</p>
+    <ol>
+        <li>Faça um fork do projeto.</li>
+        <li>Crie uma branch para suas modificações: <code>git checkout -b feature/nova-feature</code>.</li>
+        <li>Faça commit das suas mudanças: <code>git commit -m 'Adiciona nova feature'</code>.</li>
+        <li>Faça um push para a branch: <code>git push origin feature/nova-feature</code>.</li>
+        <li>Abra um Pull Request.</li>
+    </ol>
+</body>
+
+</html>
