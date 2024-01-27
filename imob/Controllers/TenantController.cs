@@ -1,4 +1,3 @@
-using immob.Domains.Dtos;
 using immob.Domains.Records.Tenant;
 using immob.Services;
 using Microsoft.AspNetCore.Mvc;

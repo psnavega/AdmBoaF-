@@ -50,6 +50,10 @@ Acesse <a href="http://localhost:7228">http://localhost:7228</a> no seu navegado
 
 A documentação da API pode ser gerada automaticamente utilizando o Swagger. Acesse <a href="http://localhost:7228/swagger">http://localhost:72287228/swagger</a> após iniciar a aplicação.</p>
 
+## Pendências ##
+
+O diagrama de sequência não será entregue. Não tive tempo hábil para desenvolver essa solução.
+
 ## Revisão ##
 
 Gitflow:
